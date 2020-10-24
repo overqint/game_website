@@ -1,12 +1,14 @@
-title: Jekyll 8bit
-description: A Jekyll theme inspired by classic 8bit games.
+title: Play your avatar
+description: Upload your avatar choose a game and play
 theme: jekyll-theme-8bit
 logo: nes-kirby
-show_downloads: true
+show_avatar: true
+show_posts: true
 plugins:
- - jekyll-paginate
- - jekyll-seo-tag
-paginate: 2
+  - jekyll-paginate
+  - jekyll-seo-tag
+paginate: 3
+paginate_path: "/blog/page:num"
 social:
   twitter: https://twitter.com/username
   facebook: https://facebook.com/username
