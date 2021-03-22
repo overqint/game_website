@@ -1,4 +1,6 @@
 <footer>
+  <script src="/assets/js/metaMask.js"></script>
+  <script src="/node_modules/web3/dist/web3.min.js"></script>
   <div class="nes-container is-rounded brown-border footer">
     {% if site.github.is_project_page %}
     <p>
@@ -10,4 +12,17 @@
     <p><i class="nes-jp-logo"></i></p>
     <p><small> <a href="/play_a_game.html">Play a game</a></small></p>
   </div>
+  <!-- Connect to MetaMask -->
+  <div id="connect-metamask" class="nes-container is-rounded brown-border footer" onclick="connectMetaMask()">
+    <p><img src="/assets/images/MetaMask.svg" style="height: 50px;width: 50px;" /></p>
+    <p><small>Connect MetaMask</small></p>
+  </div>
+  <!-- METAMASK CONNECTED -->
+  <div id="metamask-connected" class="nes-container is-rounded brown-border footer">
+    <p><img src="/assets/images/MetaMask-connected.svg" style="height: 50px;width: 50px;" /></p>
+    <p><small>MetaMask Connected</small></p>
+  </div>
+  <script>
+    isMetaMaskConnected();
+  </script>
 </footer>

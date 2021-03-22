@@ -23,3 +23,5 @@ social:
   linkedin: https://www.linkedin.com/in/username
 disqus:
   shortname: jekyll-theme-8bit
+include: ["node_modules"]
+exclude: []
