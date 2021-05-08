@@ -1,14 +1,29 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
-//import abi from './ERC721.abi.json';
 import Web3 from 'web3';
-//const erc721 = require("@0xcert/ethereum-erc721/build/erc721.json").ERC721;
 import { OpenSeaPort, Network } from 'opensea-js';
+import * as Constants from 'opensea-js/lib/constants';
 
 function App() {
-  // const { status, connect, account } = useMetaMask();
+
+  const live = true;
   const [account, setAccount] = useState('');
+  const [userTokens, setUserTokens] = useState([]);
+  const liveContractAddresses = [{
+    "name": "cryptoKitties",
+    "address": Constants.CK_ADDRESS
+  },
+  {
+    "name": "decentraLand",
+    "address": Constants.DECENTRALAND_ESTATE_ADDRESS
+  }
+  ];
+  const testContractAddresses = [{
+    "name": "openstore",
+    "address": Constants.WYVERN_EXCHANGE_ADDRESS_RINKEBY
+  }];
+  let ContractAddresses = liveContractAddresses;
 
   const initConnection = async () => {
     await loadWeb3();
@@ -34,51 +49,40 @@ function App() {
     const accounts = await web3.eth.getAccounts()
     const userAccount = accounts[0];
     setAccount(userAccount);
-    
+
     const seaport = new OpenSeaPort(window.web3.currentProvider, {
-      networkName: Network.Main
+      networkName: live ? Network.Main : Network.Rinkeby
     });
 
-    const cryptoAsset = {
-      tokenAddress: "0x06012c8cf97bead5deae237070f9587f8e7a266d", // string
-      tokenId: "1" // string | number | null
-    };
+    if (!live) {
+      ContractAddresses = testContractAddresses;
+    }
 
-    const balance = await seaport.getAssetBalance({
+    const balanceOfWETH = await seaport.getTokenBalance({
       accountAddress: userAccount, // string
-      asset: cryptoAsset // Asset
+      tokenAddress: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
     });
-    
-    const ownsKitty = balance.greaterThan(0);
 
-    console.log("check it kitties", ownsKitty);
+    console.log("check ethers", balanceOfWETH.toNumber());
 
+    ContractAddresses.map(async (el, key) => {
+      const balance = await seaport.getAssetBalance({
+        accountAddress: userAccount, // string
+        asset: {
+          tokenAddress: el.address,
+          tokenId: "0"
+        }
+      });
 
-    //const networkId = await web3.eth.net.getId();
-    //console.log("check id", networkId);
-    //const networkData = Color.networks[networkId]
-    // if(networkData) {
-    //   const abi = Color.abi
-    //   const address = networkData.address
-    //const contract = new web3.eth.Contract(erc721.abi, "0x495f947276749Ce646f68AC8c248420045cb7b5e");
-    //const totalSupply = await contract.methods.totalSupply().call();
-    
-    //   this.setState({ contract })
-    // const totalSupply = await contract.methods.totalSupply().call();
-    // console.log("total supply", totalSupply);
-    //   this.setState({ totalSupply })
-    //   // Load Colors
-    //   for (var i = 1; i <= totalSupply; i++) {
-    //     const color = await contract.methods.colors(i - 1).call()
-    //     this.setState({
-    //       colors: [...this.state.colors, color]
-    //     })
-    //   }
-    // } else {
-    //   window.alert('Smart contract not deployed to detected network.')
-    // }
+      const ownsThisToken = balance.greaterThan(0);
+
+      const userTokenObj = { "name": el.name, ownsThisToken };
+
+      let tempTokens = userTokens;
+      tempTokens.push(userTokenObj);
+      setUserTokens([...tempTokens]);
+    });
   }
-
 
   return (
     <div className="App">
@@ -87,6 +91,9 @@ function App() {
         {account === '' ?
           <button onClick={() => initConnection()} className="button">Connect to metamask</button>
           : <p>connected account is: {account}</p>}
+        {userTokens.map((el, key) => {
+          return <div key={key}>{el.ownsThisToken ? `You own ${el.name}` : `You don't own any ${el.name}`}</div>;
+        })}
       </header>
     </div>
   );
