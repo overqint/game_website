@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Web3 from 'web3';
 import { OpenSeaPort, Network } from 'opensea-js';
 import * as Constants from 'opensea-js/lib/constants';
