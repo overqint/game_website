@@ -1,12 +1,7 @@
-import Header from './Header';
-import Footer from './Footer';
-
 import './index.scss';
 
 const Home = () => {
   return (
-    <div className="container">
-      <Header />
       <div className="main">
         <div>
           <div className="title">PLAY YOUR AVATAR</div>
@@ -35,8 +30,6 @@ const Home = () => {
           </ul>
         </div>
       </div>
-      <Footer />
-    </div>
   );
 };
 

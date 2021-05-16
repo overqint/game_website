@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Web3 from 'web3';
 import { OpenSeaPort, Network } from 'opensea-js';
 import * as Constants from 'opensea-js/lib/constants';
+import cryptoKittiesABI from '../../abi/cryptoKitties.abi.json';
 
 function App() {
 
@@ -27,8 +28,21 @@ function App() {
 
   const initConnection = async () => {
     await loadWeb3();
-    await loadBlockchainData();
+    await loadContractData();
+    //await loadBlockchainData();
   };
+
+  const loadContractData = async () => {
+    const wFetch = window.web3.eth;
+    const kittieContract = new wFetch.Contract(cryptoKittiesABI, Constants.CK_ADDRESS);
+    const accounts = await wFetch.getAccounts();
+    const userAccount = accounts[0];
+    console.log("check kitties", kittieContract);
+    kittieContract.balanceOf(userAccount, (result) => {
+      console.log("check result", result);
+    })
+    
+  }
 
   const loadWeb3 = async () => {
     if (window.ethereum) {
