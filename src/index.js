@@ -1,20 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import configureStore from '../src/redux/store';
+import createRoutes from './routes';
 
 import './index.css';
-
-import App from './App';
-import Home from './components/Home';
-
 import reportWebVitals from './reportWebVitals';
-import { MetaMaskProvider } from 'metamask-react';
+//import { MetaMaskProvider } from 'metamask-react';
+
+
+const initialState = {}
+const store = configureStore(initialState);
+const routes = createRoutes(store);
 
 ReactDOM.render(
   <React.StrictMode>
-    <MetaMaskProvider>
-    {/* <App /> */}
-    <Home />
-    </MetaMaskProvider>
+    <Provider store={store}>
+      <Router>
+        {routes}
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
