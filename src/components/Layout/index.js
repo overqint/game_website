@@ -10,6 +10,8 @@ import Header from '../Common/Header';
 import Footer from '../Common/Footer';
 import * as syncActions from '../../redux/actions/Sync.action';
 
+import '../../assets/scss/common.scss';
+
 const live = true;
 const liveContractAddresses = [{
     "name": "cryptoKitties",

@@ -1,4 +1,5 @@
-import avatar from '../../assets/img/avatar1.png';
+import './index.scss';
+import avatar from '../../../assets/img/avatar.png';
 
 const Header = () => {
   return (
