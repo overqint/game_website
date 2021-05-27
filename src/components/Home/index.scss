@@ -5,7 +5,8 @@
   background: url("../../assets/img/background.png") 100% 100% no-repeat;
   background-position: 50% 70%;
 
-  & > div {
+  & .content {
+    position: relative;
     padding: 118px 0;
 
     & > .title {
@@ -108,8 +109,7 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .main > div {
-    padding: 50px 0;
+  .main .content {
 
     & > .title {
       font-size: 36px;
@@ -131,7 +131,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .main > div {
+  .main .content {
     & > .title {
       font-size: 24px !important;
       line-height: 2;
@@ -154,7 +154,8 @@
 }
 
 @media screen and (max-width: 480px) {
-  .main > div {
+  .main .content {
+    padding: 45px 0;
     .game-panel {
       flex-direction: column;
       align-items: center;
@@ -176,7 +177,7 @@
 }
 
 @media screen and (max-width: 440px) {
-  .main > div .game-panel li .game {
+  .main .content .game-panel li .game {
     height: 40vw !important;
 
     .title,
@@ -187,7 +188,7 @@
 }
 
 @media screen and (max-width: 375px) {
-  .main > div .game-panel li {
+  .main .content .game-panel li {
     padding: 11px;
 
     .game {

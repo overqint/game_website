@@ -9,8 +9,8 @@ const Navbar = () => {
     {title: 'Help', to: '/'},
   ];
 
-  const linkList = links.map(link => {
-    return <li><Link to={link.to}>{link.title}</Link></li>
+  const linkList = links.map((link, i) => {
+    return <li key={i}><Link to={link.to}>{link.title}</Link></li>
   });
   return (
     <div className="navbar">
