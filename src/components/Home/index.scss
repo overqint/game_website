@@ -1,101 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
-
-$fontColor: #ffe600;
-$fontFamily: "Press Start 2P", cursive;
-
-body {
-  overflow-x: hidden;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: $fontColor;
-}
-
-.container {
-  font-family: $fontFamily;
-  color: $fontColor;
-  max-width: 1440px;
-  margin: 0 auto;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  background: #000;
-  font-size: 24px;
-
-  .profile {
-    display: flex;
-    align-items: center;
-
-    .avatar {
-      margin-right: 23px;
-
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
-
-  .user-holdings {
-    display: flex;
-    align-items: center;
-    letter-spacing: -0.05em;
-
-    span {
-      margin-right: 20px;
-    }
-
-    .coins {
-      font-size: 14px;
-    }
-  }
-}
-
-.footer {
-  display: flex;
-  align-items: center;
-  font-size: 10px;
-  letter-spacing: -0.005em;
-  background: #000;
-  padding: 20px 13px;
-
-  .links,
-  .copyright {
-    width: 33.33%;
-  }
-
-  .links {
-    display: flex;
-
-    a {
-      text-decoration: underline;
-      margin-right: 20px;
-    }
-  }
-
-  .copyright {
-    text-align: center;
-  }
-}
+@import "../../assets/scss/variables";
 
 .main {
   min-height: 874px;
   background: url("../../assets/img/background.png") 100% 100% no-repeat;
   background-position: 50% 70%;
 
-  & > div {
+  & .content {
+    position: relative;
     padding: 118px 0;
 
     & > .title {
@@ -110,7 +21,7 @@ a {
       &:after {
         content: "PLAY YOUR AVATAR";
         position: absolute;
-        -webkit-text-stroke: 0.2em #000000; /* Chris Coyier's favorite color! */
+        -webkit-text-stroke: 0.2em #000000;
         left: 0;
         right: 0;
         top: 0;
@@ -198,8 +109,7 @@ a {
 }
 
 @media screen and (max-width: 1024px) {
-  .main > div {
-    padding: 50px 0;
+  .main .content {
 
     & > .title {
       font-size: 36px;
@@ -218,42 +128,10 @@ a {
       }
     }
   }
-
-  .footer {
-    justify-content: space-between;
-
-    .links,
-    .copyright {
-      width: auto;
-    }
-  }
 }
 
 @media screen and (max-width: 768px) {
-  .header {
-    font-size: 12px;
-
-    .profile .avatar {
-      width: 50px;
-      margin-right: 15px;
-    }
-
-    .user-holdings {
-      span {
-        margin-right: 5px;
-
-        &:last-child {
-          margin-right: 15px;
-        }
-      }
-
-      .coins {
-        font-size: 8px;
-      }
-    }
-  }
-
-  .main > div {
+  .main .content {
     & > .title {
       font-size: 24px !important;
       line-height: 2;
@@ -267,24 +145,6 @@ a {
       }
     }
   }
-
-  .footer {
-    .links,
-    .copyright {
-      line-height: 2;
-    }
-
-    .links {
-      flex-direction: column;
-      li:nth-child(2) {
-        margin: 15px 0;
-      }
-    }
-
-    .copyright {
-      flex-shrink: 1;
-    }
-  }
 }
 
 @media screen and (max-width: 642px) {
@@ -294,7 +154,8 @@ a {
 }
 
 @media screen and (max-width: 480px) {
-  .main > div {
+  .main .content {
+    padding: 45px 0;
     .game-panel {
       flex-direction: column;
       align-items: center;
@@ -316,7 +177,7 @@ a {
 }
 
 @media screen and (max-width: 440px) {
-  .main > div .game-panel li .game {
+  .main .content .game-panel li .game {
     height: 40vw !important;
 
     .title,
@@ -327,7 +188,7 @@ a {
 }
 
 @media screen and (max-width: 375px) {
-  .main > div .game-panel li {
+  .main .content .game-panel li {
     padding: 11px;
 
     .game {

@@ -1,4 +1,8 @@
-import avatar from '../../assets/img/avatar1.png';
+import React from 'react';
+
+import './index.scss';
+import avatar from '../../../assets/img/avatar.png';
+import Navbar from './Navbar';
 
 const Header = () => {
   return (
@@ -6,6 +10,7 @@ const Header = () => {
       <div className="profile">
         <div className="avatar">
           <img src={avatar} alt="Avatar" />
+          <Navbar />
         </div>
         <div>Player</div>
       </div>
