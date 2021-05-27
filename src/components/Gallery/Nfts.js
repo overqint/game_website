@@ -1,4 +1,4 @@
-import nftImg from '../../assets/img/game1.png';
+import nftImg from '../../assets/img/nft.png';
 
 const Nfts = ({type}) => {
   return (
