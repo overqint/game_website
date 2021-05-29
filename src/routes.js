@@ -4,8 +4,10 @@ import {
     Route
 } from "react-router-dom";
 
-import Home from './components/Home';
 import Layout from './components/Layout';
+
+import Home from './components/Home';
+import Gallery from './components/Gallery';
 
 export default () => {
     return (
@@ -13,6 +15,11 @@ export default () => {
             <Route exact path="/">
                 <Layout>
                     <Home />
+                </Layout>
+            </Route>
+            <Route exact path="/gallery">
+                <Layout>
+                    <Gallery />
                 </Layout>
             </Route>
         </Switch>
