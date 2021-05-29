@@ -5,6 +5,7 @@ import Web3 from 'web3';
 import { OpenSeaPort, Network } from 'opensea-js';
 import * as Constants from 'opensea-js/lib/constants';
 import cryptoKittiesABI from '../../abi/cryptoKitties.abi.json';
+import axios from 'axios';
 
 import Header from '../Common/Header';
 import Footer from '../Common/Footer';
@@ -41,20 +42,29 @@ class Layout extends React.Component {
     initConnection = async () => {
         await this.loadWeb3();
         await this.loadContractData();
-        await this.loadBlockchainData();
-    };
-
-    loadContractData = async () => {
-        const wFetch = window.web3.eth;
-        const kittieContract = new wFetch.Contract(cryptoKittiesABI, Constants.CK_ADDRESS);
-        const accounts = await wFetch.getAccounts();
+        const accounts = await window.web3.eth.getAccounts();
         const userAccount = accounts[0];
-        console.log("check kitties", kittieContract);
-        // kittieContract.balanceOf(userAccount, (result) => {
-        //     console.log("check result", result);
-        // })
+        const wFetch = await window.web3;
+        console.log("check w", wFetch)
+        // const testObj = {
+        //     //"web3": JSON.strparingify(window.web3),
+        //     "contractAddress": Constants.CK_RINKEBY_ADDRESS,
+        //     "ownerAddress": userAccount,
+        // }
 
-    }
+        // axios.post('http://localhost:5000/getTokens', testObj)
+        //     .then(function (response) {
+        //         console.log(response);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
+
+        const response = await axios.get(`https://rinkeby-api.opensea.io/api/v1/assets?owner=${userAccount}&order_direction=desc&offset=0&limit=20`);
+        let data = response.data.assets
+
+        //await this.loadBlockchainData();
+    };
 
     loadWeb3 = async () => {
         if (window.ethereum) {
@@ -67,6 +77,51 @@ class Layout extends React.Component {
         else {
             window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
         }
+    }
+
+    loadContractData = async () => {
+        // The minimum ABI to get ERC20 Token balance
+        let minABI = [
+            // balanceOf
+            {
+                "constant": true,
+                "inputs": [{ "name": "_owner", "type": "address" }],
+                "name": "balanceOf",
+                "outputs": [{ "name": "balance", "type": "uint256" }],
+                "type": "function"
+            },
+            // decimals
+            {
+                "constant": true,
+                "inputs": [],
+                "name": "decimals",
+                "outputs": [{ "name": "", "type": "uint8" }],
+                "type": "function"
+            }
+        ];
+        const wFetch = window.web3.eth;
+        window.web3.eth.net.getNetworkType()
+            .then(console.log);
+        const accounts = await wFetch.getAccounts();
+        const userAccount = accounts[0];
+
+        /***
+         * Cryptokitties working code
+         */
+
+        // const kittieContract = new wFetch.Contract(minABI, Constants.CK_RINKEBY_ADDRESS);
+        // const kitties = await kittieContract.methods.balanceOf(userAccount).call();
+        // console.log("check kitties", kitties);
+
+        /***
+         * Decentraland working code
+         */
+
+        // const DclContract = new wFetch.Contract(minABI, Constants.DECENTRALAND_ESTATE_ADDRESS);
+        // const lands = await DclContract.methods.balanceOf(userAccount).call();
+        // console.log("check lands", lands);
+
+
     }
 
     loadBlockchainData = async () => {
