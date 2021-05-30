@@ -1,27 +1,34 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 import './index.scss';
 
 import Alert from '../Common/Alert';
 
-const Home = () => {
+const Home = (props) => {
   const games = [
     { id: 1, title: 'Game A' },
     { id: 2, title: 'Game B' },
     { id: 3, title: 'Game C' },
   ];
-  const [selectedAvatar, setSelectedAvatar] = useState(false);
+  const selectedAvatar = props.appReducer.SelectedImage;
   const [showAvatarAlert, setShowAvatarAlert] = useState(false);
 
   const handleClick = e => {
     if(!selectedAvatar) {
-      setShowAvatarAlert(true);
-      setTimeout(() => {
-        setShowAvatarAlert(false);
-      }, 4900);
+      showAlert();
       return;
     }
   };
+
+  const showAlert = () => {
+    if (!showAvatarAlert) setShowAvatarAlert(true);
+    
+    let alertTimeout = setTimeout(() => {
+      setShowAvatarAlert(false);
+    }, 5000);
+    clearTimeout(alertTimeout);
+  }
 
   const gameList = games.map((game, i) => {
     return <li onClick={handleClick} key={i}>
@@ -47,4 +54,5 @@ const Home = () => {
   );
 };
 
-export default Home;
+const select = state => state;
+export default connect(select)(Home);
