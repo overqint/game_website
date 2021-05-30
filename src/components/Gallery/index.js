@@ -9,7 +9,7 @@ import Nfts from './Nfts';
 
 import * as syncActions from '../../redux/actions/Sync.action';
 
-class Home extends React.Component {
+class Gallery extends React.Component {
   state = {
     showAvatarAlert: false,
     userAccount: "",
@@ -116,4 +116,4 @@ class Home extends React.Component {
 };
 
 const select = state => state;
-export default connect(select)(Home);
+export default connect(select)(Gallery);
