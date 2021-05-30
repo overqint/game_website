@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import './index.scss';
@@ -16,15 +16,14 @@ class Home extends React.Component {
     userNftImages: [],
     randomNftImages: [],
     SelectedImage: null
-  }
-  // setTimeout(() => {
-  //   setShowAvatarAlert(false);
-  // }, 4900)
+  };
+  alertTimeout = null;
+
   componentDidMount = async () => {
     await this.initConnection();
     await this.fetchUsersNFTs();
     await this.fetchRandomNFTs();
-  }
+  };
 
   initConnection = async () => {
     await this.loadWeb3();
@@ -36,16 +35,16 @@ class Home extends React.Component {
 
   loadWeb3 = async () => {
     if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum)
+      window.web3 = new Web3(window.ethereum);
       await window.ethereum.enable();
     }
     else if (window.web3) {
       window.web3 = new Web3(window.web3.currentProvider);
     }
     else {
-      window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+      window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
     }
-  }
+  };
 
   fetchUsersNFTs = async () => {
     const response = await axios.get(`https://rinkeby-api.opensea.io/api/v1/assets?owner=${this.state.userAccount}&order_direction=desc&offset=0&limit=20`);
@@ -55,26 +54,38 @@ class Home extends React.Component {
       if (el.image_url) {
         NftImages.push(el.image_url);
       }
+      return null;
     });
     this.setState({ userNftImages: NftImages });
-  }
+  };
 
   fetchRandomNFTs = async () => {
     const response = await axios.get(`https://rinkeby-api.opensea.io/wyvern/v1/orders?bundled=false&include_bundled=false&include_invalid=false&limit=5&offset=0&order_by=created_date&order_direction=desc`);
     let data = response.data.orders;
     let NftImages = [];
     data.map(el => {
-      if (el.asset.image_url) {
+      if (el.asset && el.asset.image_url) {
         NftImages.push(el.asset.image_url);
       }
+      return null;
     });
     this.setState({ randomNftImages: NftImages });
-  }
+  };
 
   saveImage = (image) => {
     if (image) {
       this.props.dispatch(syncActions.saveUserImage(image));
+      this.showAlert();
     }
+  };
+
+  showAlert() {
+    if (this.alertTimeout) clearTimeout(this.alertTimeout);
+
+    if (!this.showAvatarAlert) this.setState({ showAvatarAlert: true });
+    this.alertTimeout = setTimeout(() => {
+      this.setState({ showAvatarAlert: false });
+    }, 5000);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -104,5 +115,5 @@ class Home extends React.Component {
   }
 };
 
-const select = state => state
+const select = state => state;
 export default connect(select)(Home);
