@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 
-const Nfts = ({ type, images }) => {
-  const [img, setImg] = React.useState(null);
+const Nfts = ({ type, images, selectedImage, saveImage }) => {
+  const [img, setImg] = React.useState(selectedImage);
 
   const selectImage = (el) => {
     setImg(el);
+    saveImage(el);
   }
 
   useEffect(() => {
-    if(images.length > 0) {
+    if(!selectedImage && images.length > 0) {
       setImg(images[0]);
+      saveImage(images[0]);
     }
   }, []);
 

@@ -14,7 +14,8 @@ class Home extends React.Component {
     showAvatarAlert: false,
     userAccount: "",
     userNftImages: [],
-    randomNftImages: []
+    randomNftImages: [],
+    SelectedImage: null
   }
   // setTimeout(() => {
   //   setShowAvatarAlert(false);
@@ -70,6 +71,19 @@ class Home extends React.Component {
     this.setState({ randomNftImages: NftImages });
   }
 
+  saveImage = (image) => {
+    if (image) {
+      this.props.dispatch(syncActions.saveUserImage(image));
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // You don't have to do this check first, but it can help prevent an unneeded render
+    if (nextProps.appReducer.SelectedImage !== this.state.SelectedImage) {
+      this.setState({ SelectedImage: nextProps.appReducer.SelectedImage });
+    }
+  }
+
   render() {
     return (
       <div className="page-gallery">
@@ -78,11 +92,11 @@ class Home extends React.Component {
           <div className="title">Gallery</div>
           {
             this.state.userNftImages.length > 0 &&
-            <Nfts type="your" images={this.state.userNftImages} />
+            <Nfts type="your" selectedImage={this.state.SelectedImage} saveImage={this.saveImage} images={this.state.userNftImages} />
           }
           {
             this.state.randomNftImages.length > 0 &&
-            <Nfts type="random" images={this.state.randomNftImages} />
+            <Nfts type="random" selectedImage={this.state.SelectedImage} saveImage={this.saveImage} images={this.state.randomNftImages} />
           }
         </div>
       </div>
