@@ -1,10 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './index.scss';
-import avatar from '../../../assets/img/avatar.png';
+import defaultAvatar from '../../../assets/img/avatar.png';
 import Navbar from './Navbar';
 
-const Header = () => {
+const Header = (props) => {
+  const selectedImage = props.appReducer.SelectedImage;
+  const avatar = selectedImage ? selectedImage : defaultAvatar;
+
   return (
     <div className="header">
       <div className="profile">
@@ -26,4 +30,5 @@ const Header = () => {
   );
 };
 
-export default Header;
+const select = state => state;
+export default connect(select)(Header);
