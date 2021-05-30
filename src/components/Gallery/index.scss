@@ -31,9 +31,15 @@
         justify-content: center;
         margin: 146px auto 88px;
 
+
+        .selected {
+          border: 2px solid red;
+        }
+
         li {
           margin: 0 32.5px;
-
+          cursor: pointer;
+          
           img {
             width: 47px;
             height: 140px;

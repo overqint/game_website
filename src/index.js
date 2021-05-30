@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import configureStore from '../src/redux/store';
 import createRoutes from './routes';
 
@@ -11,15 +12,17 @@ import reportWebVitals from './reportWebVitals';
 
 
 const initialState = {}
-const store = configureStore(initialState);
+const { store, persistor } = configureStore(initialState);
 const routes = createRoutes(store);
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
-        {routes}
-      </Router>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          {routes}
+        </Router>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
