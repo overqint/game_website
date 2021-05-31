@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Nfts = ({ type, images, selectedImage, saveImage }) => {
-  const [img, setImg] = React.useState(selectedImage);
+  const [img, setImg] = useState(null);
 
   const selectImage = (el) => {
     setImg(el);
