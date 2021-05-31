@@ -1,0 +1,75 @@
+.page-gallery {
+  min-height: 874px;
+  background: url("../../assets/img/background.png") 100% 100% no-repeat;
+  background-position: 50% 70%;
+
+  .content {
+    position: relative;
+    padding-top: 39px;
+
+    & > .title {
+      margin-bottom: 44px;
+
+      &:after {
+        content: "Gallery";
+      }
+    }
+
+    .nfts {
+      .title {
+        text-align: center;
+        font-size: 24px;
+        text-transform: capitalize;
+        
+        &:after {
+          content: "Your NFTs";
+        }
+      }
+
+      ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 146px auto 88px;
+
+        li {
+          margin: 0 32.5px;
+          cursor: pointer;
+          border: 2px solid transparent;
+
+          &.selected {
+            border-color: #ff0000;
+          }
+          
+          img {
+            width: 100px;
+          }
+        }
+      }
+
+      &.random .title:after {
+        content: 'Random NFTs';
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page-gallery .content {
+    .title {
+      font-size: 36px;
+    }
+
+    .nfts .title {
+      font-size: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .page-gallery .content {
+    .title {
+      font-size: 24px;
+    }
+  }
+}
