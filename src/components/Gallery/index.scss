@@ -29,20 +29,20 @@
       ul {
         display: flex;
         justify-content: center;
+        align-items: center;
         margin: 146px auto 88px;
-
-
-        .selected {
-          border: 2px solid red;
-        }
 
         li {
           margin: 0 32.5px;
           cursor: pointer;
+          border: 2px solid transparent;
+
+          &.selected {
+            border-color: #ff0000;
+          }
           
           img {
-            width: 47px;
-            height: 140px;
+            width: 100px;
           }
         }
       }

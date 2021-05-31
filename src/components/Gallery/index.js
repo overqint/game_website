@@ -103,11 +103,11 @@ class Gallery extends React.Component {
           <div className="title">Gallery</div>
           {
             this.state.userNftImages.length > 0 &&
-            <Nfts type="your" selectedImage={this.state.SelectedImage} saveImage={this.saveImage} images={this.state.userNftImages} />
+            <Nfts type="your" saveImage={this.saveImage} images={this.state.userNftImages} />
           }
           {
             this.state.randomNftImages.length > 0 &&
-            <Nfts type="random" selectedImage={this.state.SelectedImage} saveImage={this.saveImage} images={this.state.randomNftImages} />
+            <Nfts type="random" saveImage={this.saveImage} images={this.state.randomNftImages} />
           }
         </div>
       </div>

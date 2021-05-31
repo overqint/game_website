@@ -1,19 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 
-const Nfts = ({ type, images, selectedImage, saveImage }) => {
-  const [img, setImg] = React.useState(selectedImage);
+const Nfts = ({ type, images, saveImage }) => {
+  const [img, setImg] = useState(null);
 
   const selectImage = (el) => {
     setImg(el);
     saveImage(el);
   }
-
-  useEffect(() => {
-    if(!selectedImage && images.length > 0) {
-      setImg(images[0]);
-      saveImage(images[0]);
-    }
-  }, []);
 
   return (
     <div className={`nfts ${type}`}>
@@ -22,7 +15,7 @@ const Nfts = ({ type, images, selectedImage, saveImage }) => {
         {
           images.map((el, key) => {
             return <li key={key} onClick={() => selectImage(el)}
-              className={img == el ? "selected" : ""}
+              className={img === el ? "selected" : ""}
             ><img src={el} alt="NFT" /></li>
           })
         }
