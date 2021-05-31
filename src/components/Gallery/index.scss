@@ -20,7 +20,7 @@
         text-align: center;
         font-size: 24px;
         text-transform: capitalize;
-        
+
         &:after {
           content: "Your NFTs";
         }
@@ -30,17 +30,18 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
         margin: 146px auto 88px;
 
         li {
-          margin: 0 32.5px;
+          margin: 0 32.5px 10px;
           cursor: pointer;
           border: 2px solid transparent;
 
           &.selected {
             border-color: #ff0000;
           }
-          
+
           img {
             width: 100px;
           }
@@ -48,7 +49,7 @@
       }
 
       &.random .title:after {
-        content: 'Random NFTs';
+        content: "Random NFTs";
       }
     }
   }
@@ -60,8 +61,14 @@
       font-size: 36px;
     }
 
-    .nfts .title {
-      font-size: 16px;
+    .nfts {
+      .title {
+        font-size: 16px;
+      }
+
+      ul li img {
+        width: 50px;
+      }
     }
   }
 }
