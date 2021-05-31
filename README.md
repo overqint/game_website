@@ -1,154 +1,70 @@
-# jekyll-theme-8bit
+# Getting Started with Create React App
 
-[![Build Status](https://travis-ci.org/julianolf/jekyll-theme-8bit.svg?branch=master)](https://travis-ci.org/julianolf/jekyll-theme-8bit) [![Gem Version](https://badge.fury.io/rb/jekyll-theme-8bit.svg)](https://badge.fury.io/rb/jekyll-theme-8bit)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-A Jekyll theme inspired by classic 8bit games.
+## Available Scripts
 
-## Preview
+In the project directory, you can run:
 
-You can see how the theme looks like [here](http://julianofernandes.com.br/jekyll-theme-8bit/).
+### `yarn start`
 
-## Installation
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Add this line to your Jekyll site's `Gemfile`:
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-```ruby
-gem "jekyll-theme-8bit"
-```
+### `yarn test`
 
-And add this line to your Jekyll site's `_config.yml`:
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-```yaml
-theme: jekyll-theme-8bit
-```
+### `yarn build`
 
-And then execute:
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-    $ bundle
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-Or install it yourself as:
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-    $ gem install jekyll-theme-8bit
+### `yarn eject`
 
-## Contents
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-**jekyll-theme-8bit** has been scaffolded by the `jekyll new-theme` command and therefore has all the necessary files and directories to have a new Jekyll site up and running with zero-configuration.
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-### Layouts
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-Refers to files within the `_layouts` directory, that define the markup for your theme.
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-- `default.html` &mdash; The base layout that lays the foundation for subsequent layouts. The derived layouts inject their contents into this file at the line that says `{{ content }}` and are linked to this file via [FrontMatter](https://jekyllrb.com/docs/frontmatter/) declaration `layout: default`.
-- `post.html` &mdash; The layout for your posts.
+## Learn More
 
-### Includes
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-Refers to snippets of code within the `_includes` directory that can be inserted in multiple layouts (and another include-file as well) within the same theme-gem.
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-- `downloads.html` &mdash; Insert download buttons when using the theme on a project with GitHub Pages enabled and the `show_downloads` variable set to *true* in `_config.yml`.
-- `footer.html` &mdash; Defines the site's footer section.
-- `fork-me.html` &mdash; Shows a *"Fork me on GitHub"* link when using the theme on a project with GitHub Pages enabled.
-- `google-analytics.html` &mdash; Inserts Google Analytics module (active only in production environment).
-- `head.html` &mdash; Code-block that defines the `<head></head>` in  _default_ layout.
-- `header.html` &mdash; Defines the site's main header section. By default, pages with a defined `title` attribute will have links displayed here.
-- `social.html` &mdash; Icons for social networks. Wich icons will be visible depends on what was defined in `_config.yml`.
+### Code Splitting
 
-### SASS
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-Refers to `.scss` files within the `_sass` directory that define the theme's styles.
+### Analyzing the Bundle Size
 
-- `fonts.scss` &mdash; Defines font faces used by 8bit's theme.
-- `jekyll-theme-8bit.scss` &mdash; The core file imported by preprocessed `assets/css/style.scss`, it defines the defaults for the theme, layout, etc, and also further imports sass partials to supplement itself.
-- `rouge-github.scss` &mdash; Defines the styles for syntax-highlighting.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Assets
+### Making a Progressive Web App
 
-Refers to various asset files within the `assets` directory.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-- `css/style.scss` &mdash; Imports sass files from within the `_sass` directory. It is what gets processed into the theme's main stylesheet `main.css` called by `_layouts/default.html` via `_includes/head.html`.
-- `fonts/Press-Start-2P/` &mdash; The directory contains font files for *ttf*, *woff* and *woff2* formats.
-- `js/scale-fix.js` &mdash; Zooming scale fix for iPhone.
+### Advanced Configuration
 
-This directory can include sub-directories to manage assets of similar type (`img`, `fonts`, `svg`), and will be copied over as is, to the final transformed site directory.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Plugins
+### Deployment
 
-**jekyll-theme-8bit** comes with two plugins preinstalled.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-- [`jekyll-paginate`](https://jekyllrb.com/docs/pagination/) &mdash; Allows break the main listing of posts up into smaller lists and display them over multiple pages. See [documentation](https://jekyllrb.com/docs/pagination/) for more details.
-- [`jekyll-seo-tag`](https://github.com/jekyll/jekyll-seo-tag) &mdash; Ensure your website gets the most useful meta tags. See [usage](https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md) to know how to set it up.
+### `yarn build` fails to minify
 
-## Usage
-
-### Customization
-
-For details on how to customize the layout, style and configurations head to [Jekyll](https://jekyllrb.com/docs/themes/) documentation, it has detailed information about everything you might need.
-
-So far 8bit theme specific customizations are only available through entries in `_config.yml`.
-
-#### Custom logo
-
-Set **logo** entry in `_config.yml`. It accepts an image path like `assets/img/logo.png` or one of the available Nintendo characters provided by [NES.css](https://nostalgic-css.github.io/NES.css/): `nes-mario`, `nes-ash`, `nes-pokeball`, `nes-bulbasaur`, `nes-charmander`, `nes-squirtle`, `nes-kirby`.
-
-**PS**.: Nintendo owns the copyright of these characters. Please comply with the Nintendo guidelines and laws of the applicable jurisdiction.
-
-#### Showing download buttons
-
-If you’re publishing on GitHub Pages for a project you can enable the download buttons by just setting `show_downloads: true` in `_config.yml`.
-
-#### Social networks
-
-You can show links for accounts you have on some of the most popular social networks. See the example below with the complete list of available networks.
-
-```yaml
-# file: _config.yml
-
-social:
-  twitter: https://twitter.com/username
-  facebook: https://facebook.com/username
-  github: https://github.com/username
-  youtube: https://youtube.com/channel/ID
-  google: https://plus.google.com/username
-  medium: https://medium.com/@username
-  twitch: https://twitch.com/username
-  reddit: https://www.reddit.com/user/username
-  whatsapp: tel:+5541999999999
-  gmail: mailto:username@domain.net
-  linkedin: https://www.linkedin.com/in/username
-```
-
-#### Comments
-
-Comments feature is provided by an integration between Jekyll and Disqus, so if you want to have a comments section below each post you will need a Disqus account.
-
-If you already have an account all you need to do is add the following entries to your `_config.yml`:
-
-```yaml
-disqus:
-  shortname: your-sites-shortname
-```
-
-In case you still don't have an account take a look at [Disqus](https://disqus.com)' page for details on how to create and configure an account.
-
-Comments are enabled by default but if you want to disable them for one particular post you can by just adding `comments: false` to the post's YAML Front Matter.
-
-## Contributing
-
-Bug reports and pull requests are welcome. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
-## Development
-
-To set up your environment to develop this theme, run `bundle install`.
-
-Your theme is setup just like a normal Jekyll site! To test your theme, run `bundle exec jekyll serve` and open your browser at `http://localhost:4000`. This starts a Jekyll server using your theme. Add pages, documents, data, etc. like normal to test your theme's contents. As you make modifications to your theme and to your content, your site will regenerate and you should see the changes in the browser after a refresh, just like normal.
-
-When your theme is released, only the files in `_layouts`, `_includes`, `_sass` and `assets` tracked with Git will be bundled.
-To add a custom directory to your theme-gem, please edit the regexp in `jekyll-theme-8bit.gemspec` accordingly.
-
-## License
-
-The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Credits
-
-- 8bit style by [NES.css](https://nostalgic-css.github.io/NES.css/)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
