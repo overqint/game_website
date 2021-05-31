@@ -22,7 +22,7 @@ const Nfts = ({ type, images, selectedImage, saveImage }) => {
         {
           images.map((el, key) => {
             return <li key={key} onClick={() => selectImage(el)}
-              className={img == el ? "selected" : ""}
+              className={img === el ? "selected" : ""}
             ><img src={el} alt="NFT" /></li>
           })
         }
