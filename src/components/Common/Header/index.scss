@@ -104,3 +104,9 @@
     }
   }
 }
+
+@media screen and (max-width: 320px) {
+  .header .user-holdings {
+    font-size: 8px;
+  }
+}
