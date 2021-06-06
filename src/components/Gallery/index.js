@@ -20,9 +20,21 @@ class Gallery extends React.Component {
   alertTimeout = null;
 
   componentDidMount = async () => {
-    await this.initConnection();
-    await this.fetchUsersNFTs();
     await this.fetchRandomNFTs();
+    if (window.ethereum && window.web3) {
+      await this.initConnection();
+      await this.fetchUsersNFTs();
+      let _this = this;
+      window.ethereum.on('accountsChanged', function () {
+        window.web3.eth.getAccounts(function (error, accounts) {
+          if (accounts) {
+            _this.props.dispatch(syncActions.saveUserAccount(accounts[0]));
+          } else {
+            _this.props.dispatch(syncActions.saveUserAccount(null));
+          }
+        });
+      });
+    }
   };
 
   initConnection = async () => {
@@ -47,25 +59,27 @@ class Gallery extends React.Component {
   };
 
   fetchUsersNFTs = async () => {
-    const response = await axios.get(`https://rinkeby-api.opensea.io/api/v1/assets?owner=${this.state.userAccount}&order_direction=desc&offset=0&limit=20`);
-    let data = response.data.assets;
-    let NftImages = [];
-    data.map(el => {
-      if (el.image_url) {
-        NftImages.push(el.image_url);
-      }
-      return null;
-    });
-    this.setState({ userNftImages: NftImages });
+    setTimeout(async () => {
+      const response = await axios.get(`https://rinkeby-api.opensea.io/api/v1/assets?owner=${this.state.userAccount}&order_direction=desc&offset=0&limit=20`);
+      let data = response.data.assets;
+      let NftImages = [];
+      data.map(el => {
+        if (el.image_url) {
+          NftImages.push(el.image_url);
+        }
+        return null;
+      });
+      this.setState({ userNftImages: NftImages });
+    }, 3000);
   };
 
   fetchRandomNFTs = async () => {
-    const response = await axios.get(`https://rinkeby-api.opensea.io/wyvern/v1/orders?bundled=false&include_bundled=false&include_invalid=false&limit=5&offset=0&order_by=created_date&order_direction=desc`);
-    let data = response.data.orders;
+    const response = await axios.get(`https://rinkeby-api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=20`);
+    let data = response.data.assets;
     let NftImages = [];
     data.map(el => {
-      if (el.asset && el.asset.image_url) {
-        NftImages.push(el.asset.image_url);
+      if (el.image_url && !NftImages.includes(el.image_url)) {
+        NftImages.push(el.image_url);
       }
       return null;
     });

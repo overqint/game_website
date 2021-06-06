@@ -39,8 +39,20 @@ class Layout extends React.Component {
     }
 
 
-    componentDidMount() {
-        this.initConnection();
+    async componentDidMount() {
+        if (window.ethereum && window.web3) {
+            await this.initConnection();
+            let _this = this;
+            window.ethereum.on('accountsChanged', function () {
+              window.web3.eth.getAccounts(function (error, accounts) {
+                if (accounts) {
+                    _this.props.dispatch(syncActions.saveUserAccount(accounts[0]));
+                } else {
+                    _this.props.dispatch(syncActions.saveUserAccount(null));
+                }
+              });
+            });
+          }
     }
 
     componentWillReceiveProps(nextProps) {
