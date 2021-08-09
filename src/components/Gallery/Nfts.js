@@ -6,6 +6,7 @@ const Nfts = ({ type, images, saveImage }) => {
   const selectImage = (el) => {
     setImg(el);
     saveImage(el);
+    document.cookie="Image="+el;
   }
 
   return (

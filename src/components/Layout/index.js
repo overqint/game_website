@@ -53,10 +53,10 @@ class Layout extends React.Component {
                 const acc = await window.ethereum.request({ method: 'eth_accounts' });
                 if (acc[0] != '') {
                     _this.props.dispatch(syncActions.saveUserAccount(acc[0]));
-                    _this.props.dispatch(syncActions.setLoader(false));
+                   // _this.props.dispatch(syncActions.setLoader(false));
                 } else {
                     _this.props.dispatch(syncActions.saveUserAccount(null));
-                    _this.props.dispatch(syncActions.setLoader(true));
+                    //_this.props.dispatch(syncActions.setLoader(true));
                 }
             });
         }
@@ -64,9 +64,9 @@ class Layout extends React.Component {
             if (window.ethereum) {
                 const acc = await window.ethereum.request({ method: 'eth_accounts' });
                 if (acc[0] != '') {
-                    _this.props.dispatch(syncActions.setLoader(true));
+                    //_this.props.dispatch(syncActions.setLoader(true));
                 } else {
-                    _this.props.dispatch(syncActions.setLoader(false));
+                    //_this.props.dispatch(syncActions.setLoader(false));
                 }
             }
         }, 1000);
@@ -77,7 +77,7 @@ class Layout extends React.Component {
         if (nextProps.appReducer.UserAccount !== this.state.UserAccount) {
             this.setState({ UserAccount: nextProps.appReducer.UserAccount });
         }
-        this.setState({ Loader: nextProps.appReducer.Loader });
+        //this.setState({ Loader: nextProps.appReducer.Loader });
 
     }
 

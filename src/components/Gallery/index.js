@@ -24,6 +24,17 @@ class Gallery extends React.Component {
     let _this = this;
 
     if (window.ethereum) {
+      const acc = await window.ethereum.request({ method: 'eth_accounts' });
+      if (acc[0] != '') {
+        await _this.initConnection();
+        await _this.fetchUsersNFTs();
+
+        _this.props.dispatch(syncActions.saveUserAccount(acc));
+        // _this.props.dispatch(syncActions.setLoader(false));
+      } else {
+        _this.props.dispatch(syncActions.saveUserAccount(null));
+        //_this.props.dispatch(syncActions.setLoader(true));
+      }
       window.ethereum.on('accountsChanged', async function () {
         const acc = await window.ethereum.request({ method: 'eth_accounts' });
         if (acc[0] != '') {
@@ -31,10 +42,10 @@ class Gallery extends React.Component {
           await _this.fetchUsersNFTs();
 
           _this.props.dispatch(syncActions.saveUserAccount(acc));
-          _this.props.dispatch(syncActions.setLoader(false));
+          // _this.props.dispatch(syncActions.setLoader(false));
         } else {
           _this.props.dispatch(syncActions.saveUserAccount(null));
-          _this.props.dispatch(syncActions.setLoader(true));
+          //_this.props.dispatch(syncActions.setLoader(true));
         }
       });
     }
@@ -44,9 +55,9 @@ class Gallery extends React.Component {
         const acc = await window.ethereum.request({ method: 'eth_accounts' });
 
         if (acc[0] != '') {
-          _this.props.dispatch(syncActions.setLoader(true));
+          //_this.props.dispatch(syncActions.setLoader(true));
         } else {
-          _this.props.dispatch(syncActions.setLoader(false));
+          //_this.props.dispatch(syncActions.setLoader(false));
         }
       }
     }, 1000);
@@ -58,7 +69,7 @@ class Gallery extends React.Component {
     const userAccount = accounts;
     this.setState({ userAccount });
     this.props.dispatch(syncActions.saveUserAccount(userAccount));
-    this.props.dispatch(syncActions.setLoader(false));
+    //this.props.dispatch(syncActions.setLoader(false));
   };
 
   loadWeb3 = async () => {
@@ -70,14 +81,14 @@ class Gallery extends React.Component {
       window.web3 = new Web3(window.web3.currentProvider);
     }
     else {
-      this.props.dispatch(syncActions.setLoader(true));
+      //this.props.dispatch(syncActions.setLoader(true));
       window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
     }
   };
 
   fetchUsersNFTs = async () => {
     setTimeout(async () => {
-      this.props.dispatch(syncActions.setLoader(true));
+      //this.props.dispatch(syncActions.setLoader(true));
       const response = await axios.get(`https://rinkeby-api.opensea.io/api/v1/assets?owner=${this.state.userAccount}&order_direction=desc&offset=0&limit=20`);
       let data = response.data.assets;
       let NftImages = [];
@@ -88,7 +99,7 @@ class Gallery extends React.Component {
         return null;
       });
       this.setState({ userNftImages: NftImages });
-      this.props.dispatch(syncActions.setLoader(false));
+      //this.props.dispatch(syncActions.setLoader(false));
     }, 3000);
   };
 
