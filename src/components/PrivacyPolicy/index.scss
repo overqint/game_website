@@ -1,6 +1,6 @@
 .page-gallery {
   min-height: 874px;
-  background: url("../../assets/img/background.png") 100% 100% repeat-x;
+  background: url("../../assets/img/background.png") 100% 100% no-repeat;
   background-position: 50% 70%;
 
   .content {
@@ -20,46 +20,27 @@
         text-align: center;
         font-size: 24px;
         text-transform: capitalize;
-
+        
         &:after {
           content: "Your NFTs";
         }
       }
 
       ul {
-        width: 80%;
         display: flex;
         justify-content: center;
         align-items: center;
         margin: 146px auto 88px;
-        overflow-x: auto;
-        padding-bottom: 15px;
-
-        &::-webkit-scrollbar-track {
-          -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-          border-radius: 10px;
-          background-color: #f5f5f5;
-        }
-
-        &::-webkit-scrollbar {
-          width: 12px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          border-radius: 10px;
-          -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-          background-color: #555;
-        }
 
         li {
-          margin: 0 32.5px 10px;
+          margin: 0 32.5px;
           cursor: pointer;
           border: 2px solid transparent;
 
           &.selected {
             border-color: #ff0000;
           }
-
+          
           img {
             width: 100px;
           }
@@ -67,7 +48,7 @@
       }
 
       &.random .title:after {
-        content: "Random NFTs";
+        content: 'Random NFTs';
       }
     }
   }
@@ -79,18 +60,8 @@
       font-size: 36px;
     }
 
-    .nfts {
-      .title {
-        font-size: 16px;
-      }
-
-      ul {
-        margin-top: 50px;
-
-        li img {
-          width: 50px;
-        }
-      }
+    .nfts .title {
+      font-size: 16px;
     }
   }
 }

@@ -20,17 +20,56 @@ class Gallery extends React.Component {
   alertTimeout = null;
 
   componentDidMount = async () => {
-    await this.initConnection();
-    await this.fetchUsersNFTs();
     await this.fetchRandomNFTs();
+    let _this = this;
+
+    if (window.ethereum) {
+      const acc = await window.ethereum.request({ method: 'eth_accounts' });
+      if (acc[0] != '') {
+        await _this.initConnection();
+        await _this.fetchUsersNFTs();
+
+        _this.props.dispatch(syncActions.saveUserAccount(acc));
+        // _this.props.dispatch(syncActions.setLoader(false));
+      } else {
+        _this.props.dispatch(syncActions.saveUserAccount(null));
+        //_this.props.dispatch(syncActions.setLoader(true));
+      }
+      window.ethereum.on('accountsChanged', async function () {
+        const acc = await window.ethereum.request({ method: 'eth_accounts' });
+        if (acc[0] != '') {
+          await _this.initConnection();
+          await _this.fetchUsersNFTs();
+
+          _this.props.dispatch(syncActions.saveUserAccount(acc));
+          // _this.props.dispatch(syncActions.setLoader(false));
+        } else {
+          _this.props.dispatch(syncActions.saveUserAccount(null));
+          //_this.props.dispatch(syncActions.setLoader(true));
+        }
+      });
+    }
+
+    setInterval(async () => {
+      if (window.ethereum) {
+        const acc = await window.ethereum.request({ method: 'eth_accounts' });
+
+        if (acc[0] != '') {
+          //_this.props.dispatch(syncActions.setLoader(true));
+        } else {
+          //_this.props.dispatch(syncActions.setLoader(false));
+        }
+      }
+    }, 1000);
   };
 
   initConnection = async () => {
     await this.loadWeb3();
-    const accounts = await window.web3.eth.getAccounts();
-    const userAccount = accounts[0];
+    const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+    const userAccount = accounts;
     this.setState({ userAccount });
     this.props.dispatch(syncActions.saveUserAccount(userAccount));
+    //this.props.dispatch(syncActions.setLoader(false));
   };
 
   loadWeb3 = async () => {
@@ -42,34 +81,49 @@ class Gallery extends React.Component {
       window.web3 = new Web3(window.web3.currentProvider);
     }
     else {
+      //this.props.dispatch(syncActions.setLoader(true));
       window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
     }
   };
 
   fetchUsersNFTs = async () => {
-    const response = await axios.get(`https://rinkeby-api.opensea.io/api/v1/assets?owner=${this.state.userAccount}&order_direction=desc&offset=0&limit=20`);
+    setTimeout(async () => {
+      //this.props.dispatch(syncActions.setLoader(true));
+      const response = await axios.get(`https://rinkeby-api.opensea.io/api/v1/assets?owner=${this.state.userAccount}&order_direction=desc&offset=0&limit=20`);
+      let data = response.data.assets;
+      let NftImages = [];
+      data.map(el => {
+        if (el.image_url) {
+          NftImages.push(el.image_url);
+        }
+        return null;
+      });
+      this.setState({ userNftImages: NftImages });
+      //this.props.dispatch(syncActions.setLoader(false));
+    }, 3000);
+  };
+
+  fetchRandomNFTs = async () => {
+    const response = await axios.get(`https://rinkeby-api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=50`);
     let data = response.data.assets;
     let NftImages = [];
     data.map(el => {
-      if (el.image_url) {
+      if (NftImages.length >= 5) {
+        return;
+      }
+      if (el.image_url && !NftImages.includes(el.image_url)) {
         NftImages.push(el.image_url);
       }
       return null;
     });
-    this.setState({ userNftImages: NftImages });
-  };
+    if (NftImages.length < 5) {
+      setTimeout(async () => {
+        await this.fetchRandomNFTs();
+      }, 10000);
+    } else {
+      this.setState({ randomNftImages: NftImages });
+    }
 
-  fetchRandomNFTs = async () => {
-    const response = await axios.get(`https://rinkeby-api.opensea.io/wyvern/v1/orders?bundled=false&include_bundled=false&include_invalid=false&limit=5&offset=0&order_by=created_date&order_direction=desc`);
-    let data = response.data.orders;
-    let NftImages = [];
-    data.map(el => {
-      if (el.asset && el.asset.image_url) {
-        NftImages.push(el.asset.image_url);
-      }
-      return null;
-    });
-    this.setState({ randomNftImages: NftImages });
   };
 
   saveImage = (image) => {
