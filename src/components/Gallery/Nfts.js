@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 
-const Nfts = ({ type, images, saveImage }) => {
-  const [img, setImg] = useState(null);
-
+const Nfts = ({ type, images, saveImage, selectedImage1, selectedImage2 }) => {
+  
   const selectImage = (el) => {
-    setImg(el);
     saveImage(el);
-    document.cookie="Image="+el+ ";domain=.pixelk.fun;path=/";
+   // saveImage(el);
+   // document.cookie="Image="+el+ ";domain=.pixelk.fun;path=/";
   }
 
   return (
@@ -15,9 +14,24 @@ const Nfts = ({ type, images, saveImage }) => {
       <ul>
         {
           images.map((el, key) => {
-            return <li key={key} onClick={() => selectImage(el)}
-              className={img === el ? "selected" : ""}
-            ><img src={el} alt="NFT" /></li>
+            var classN = "";
+            var text = "";
+            if(selectedImage1 === el) {
+              classN="selectedPlayer1";
+              text="Player 1";
+            } else if(selectedImage2 === el) {
+              classN="selectedPlayer2";
+              text="Player 2"
+            } 
+            return <div>
+            <li style={{ marginBottom: "10px" }} key={key} onClick={() => selectImage(el)}
+              className={classN}
+            ><img src={el} alt="NFT" />
+            </li>
+            <span style={{ margin: "12px 20px" }}>
+              {text}
+            </span>
+            </div>
           })
         }
       </ul>
