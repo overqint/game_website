@@ -56,8 +56,12 @@
           cursor: pointer;
           border: 2px solid transparent;
 
-          &.selected {
+          &.selectedPlayer1 {
             border-color: #ff0000;
+          }
+
+          &.selectedPlayer2 {
+            border-color: violet;
           }
 
           img {
@@ -94,6 +98,50 @@
     }
   }
 }
+// popup css starts
+
+.ReactModal__Overlay.ReactModal__Overlay--after-open {
+  z-index: 999;
+}
+.module_main {
+  padding: 30px;
+  position: relative;
+}
+.module_button_close {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.module_button_close button {
+  background: transparent;
+  border: 0;
+  font-size: 18px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+.module_button_close button:hover {
+  color: #ffe600;
+}
+.module_button {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+.btn {
+  border: 1px solid #000;
+  background: #000;
+  font-size: 15px;
+  color: #ffe600;
+  cursor: pointer;
+  padding: 6px 12px;
+}
+.btn:hover {
+  background: #ffe600;
+  color: #000;
+  border: 1px solid #ffe600;
+}
+// popup css ends
 
 @media screen and (max-width: 375px) {
   .page-gallery .content {
