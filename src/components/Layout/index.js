@@ -14,6 +14,9 @@ const override = `
   margin: 0 auto;
 `;
 class Layout extends React.Component {
+    /*
+    This component is used adding a layout for all the common pages.
+    */
     constructor(props) {
         super(props);
 
@@ -23,6 +26,9 @@ class Layout extends React.Component {
         }
     }
 
+    /*
+    Initialize the metamask connection.
+    */
     initConnection = async () => {
         await this.loadWeb3();
         const accounts = await window.ethereum.request({ method: 'eth_accounts' });
@@ -30,6 +36,9 @@ class Layout extends React.Component {
         this.props.dispatch(syncActions.saveUserAccount(userAccount));
     };
 
+    /*
+   Load web3 JS and add an object to windows.
+    */
     loadWeb3 = async () => {
         if (window.ethereum) {
             window.web3 = new Web3(window.ethereum)
@@ -60,6 +69,9 @@ class Layout extends React.Component {
                 }
             });
         }
+        /*
+    Check if user has disconnected the metamask
+    */
         setInterval(async () => {
             if (window.ethereum) {
                 const acc = await window.ethereum.request({ method: 'eth_accounts' });

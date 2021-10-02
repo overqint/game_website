@@ -14,7 +14,9 @@ import reportWebVitals from './reportWebVitals';
 const initialState = {}
 const { store, persistor } = configureStore(initialState);
 const routes = createRoutes(store);
-
+/*
+    Main entry file of the project. Here we have included routes and enclosed them with the redux store provider.
+    */
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

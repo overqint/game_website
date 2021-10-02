@@ -7,6 +7,9 @@ import * as Constants from 'opensea-js/lib/constants';
 import cryptoKittiesABI from '../../abi/cryptoKitties.abi.json';
 
 function App() {
+  /*
+    This is an old file. Please ignore this file for now.
+    */
 
   const live = true;
   const [account, setAccount] = useState('');

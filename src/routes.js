@@ -12,6 +12,9 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import Help from './components/Help';
 
 export default () => {
+    /*
+    This component is used for routing. You can add/remove routes from this file.
+    */
     return (
         <Switch>
             <Route exact path="/">
