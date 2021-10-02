@@ -6,6 +6,9 @@ import './index.scss';
 import Alert from '../Common/Alert';
 
 const Home = (props) => {
+  /*
+    This component contains the core logic of the website and its a main component.
+    */
   const games = [
     { id: 1, title: 'Game A' },
     { id: 2, title: 'Game B' },
@@ -14,6 +17,9 @@ const Home = (props) => {
   //const selectedAvatar = props.appReducer.SelectedImage;
   const [showAvatarAlert, setShowAvatarAlert] = useState(false);
 
+  /*
+    Get cookies to check if user has already selected an NFT images or not.Setting the state data accordingly.
+    */
   function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');

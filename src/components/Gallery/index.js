@@ -11,6 +11,9 @@ import Nfts from './Nfts';
 import * as syncActions from '../../redux/actions/Sync.action';
 
 const customStyles = {
+  /*
+    Gallery component to fetch NFTs from opensea using User's wallet address
+    */
   content: {
     top: '50%',
     left: '50%',
@@ -77,6 +80,9 @@ class Gallery extends React.Component {
     }, 1000);
   };
 
+  /*
+    Initializing the metamask connection
+    */
   initConnection = async () => {
     await this.loadWeb3();
     const accounts = await window.ethereum.request({ method: 'eth_accounts' });
@@ -85,6 +91,10 @@ class Gallery extends React.Component {
     this.props.dispatch(syncActions.saveUserAccount(userAccount));
     //this.props.dispatch(syncActions.setLoader(false));
   };
+
+  /*
+   Adding web3 object to windows
+    */
 
   loadWeb3 = async () => {
     if (window.ethereum) {
@@ -100,6 +110,9 @@ class Gallery extends React.Component {
     }
   };
 
+  /*
+    Fetching user's NFTs from Opensea using the API
+    */
   fetchUsersNFTs = async () => {
     setTimeout(async () => {
       //this.props.dispatch(syncActions.setLoader(true));
@@ -116,6 +129,10 @@ class Gallery extends React.Component {
       //this.props.dispatch(syncActions.setLoader(false));
     }, 3000);
   };
+
+  /*
+    Fetching the random NFTs from Opensea using the API
+    */
 
   fetchRandomNFTs = async () => {
     const response = await axios.get(`https://rinkeby-api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=50`);
@@ -140,6 +157,9 @@ class Gallery extends React.Component {
 
   };
 
+  /*
+    Store images in cookies once user select them
+    */
   saveImage = (image, player) => {
     if (image) {
       //
