@@ -11,7 +11,7 @@ import Gallery from './components/Gallery';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Help from './components/Help';
 
-export default () => {
+const route = () => {
     /*
     This component is used for routing. You can add/remove routes from this file.
     */
@@ -40,3 +40,5 @@ export default () => {
         </Switch>
     );
 }
+
+export default route;
