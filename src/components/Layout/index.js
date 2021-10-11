@@ -60,7 +60,7 @@ class Layout extends React.Component {
             //await this.initConnection();
             window.ethereum.on('accountsChanged', async function () {
                 const acc = await window.ethereum.request({ method: 'eth_accounts' });
-                if (acc[0] != '') {
+                if (acc[0] !== '') {
                     _this.props.dispatch(syncActions.saveUserAccount(acc[0]));
                    // _this.props.dispatch(syncActions.setLoader(false));
                 } else {
@@ -75,7 +75,7 @@ class Layout extends React.Component {
         setInterval(async () => {
             if (window.ethereum) {
                 const acc = await window.ethereum.request({ method: 'eth_accounts' });
-                if (acc[0] != '') {
+                if (acc[0] !== '') {
                     //_this.props.dispatch(syncActions.setLoader(true));
                 } else {
                     //_this.props.dispatch(syncActions.setLoader(false));

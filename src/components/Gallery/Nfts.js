@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Nfts = ({ type, images, saveImage, selectedImage1, selectedImage2 }) => {
   

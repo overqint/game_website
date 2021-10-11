@@ -8,8 +8,6 @@ import createRoutes from './routes';
 
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-//import { MetaMaskProvider } from 'metamask-react';
-
 
 const initialState = {}
 const { store, persistor } = configureStore(initialState);

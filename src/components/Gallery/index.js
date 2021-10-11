@@ -42,7 +42,7 @@ class Gallery extends React.Component {
 
     if (window.ethereum) {
       const acc = await window.ethereum.request({ method: 'eth_accounts' });
-      if (acc[0] != '') {
+      if (acc[0] !== '') {
         await _this.initConnection();
         await _this.fetchUsersNFTs();
 
@@ -54,7 +54,7 @@ class Gallery extends React.Component {
       }
       window.ethereum.on('accountsChanged', async function () {
         const acc = await window.ethereum.request({ method: 'eth_accounts' });
-        if (acc[0] != '') {
+        if (acc[0] !== '') {
           await _this.initConnection();
           await _this.fetchUsersNFTs();
 
@@ -71,7 +71,7 @@ class Gallery extends React.Component {
       if (window.ethereum) {
         const acc = await window.ethereum.request({ method: 'eth_accounts' });
 
-        if (acc[0] != '') {
+        if (acc[0] !== '') {
           //_this.props.dispatch(syncActions.setLoader(true));
         } else {
           //_this.props.dispatch(syncActions.setLoader(false));
@@ -140,7 +140,7 @@ class Gallery extends React.Component {
     let NftImages = [];
     data.map(el => {
       if (NftImages.length >= 5) {
-        return;
+        return false;
       }
       if (el.image_url && !NftImages.includes(el.image_url)) {
         NftImages.push(el.image_url);

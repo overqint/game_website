@@ -8,7 +8,7 @@ const initialState = {
     Loader: false
 }
 
-export default (state = initialState, action) => {
+const r = (state = initialState, action) => {
     switch (action.type) {
         case 'SAVE_USER_ACCOUNT':
             return _.assign({}, state, { UserAccount: action.payload });
@@ -22,3 +22,5 @@ export default (state = initialState, action) => {
             return state;
     }
 };
+
+export default r;
