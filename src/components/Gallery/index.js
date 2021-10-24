@@ -116,7 +116,7 @@ class Gallery extends React.Component {
   fetchUsersNFTs = async () => {
     setTimeout(async () => {
       //this.props.dispatch(syncActions.setLoader(true));
-      const response = await axios.get(`https://rinkeby-api.opensea.io/api/v1/assets?owner=${this.state.userAccount}&order_direction=desc&offset=0&limit=20`);
+      const response = await axios.get(`https://api.opensea.io/api/v1/assets?owner=${this.state.userAccount}&order_direction=desc&offset=0&limit=20`, { headers: { 'X-API-KEY': process.env.REACT_APP_OPENSEA_API } });
       let data = response.data.assets;
       let NftImages = [];
       data.map(el => {
@@ -135,7 +135,7 @@ class Gallery extends React.Component {
     */
 
   fetchRandomNFTs = async () => {
-    const response = await axios.get(`https://rinkeby-api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=50`);
+    const response = await axios.get(`https://api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=50`, { headers: { 'X-API-KEY': process.env.REACT_APP_OPENSEA_API } });
     let data = response.data.assets;
     let NftImages = [];
     data.map(el => {
